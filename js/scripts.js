@@ -32,15 +32,9 @@ if(inputValue === ' ') {
 		li.toggleClass("strike");
 	}
 
+// Clearing input-field
+$('#input').val("");
 }}
 
 // Reordering the items
 $('#list').sortable();
-
-// Empty input-field when clicked
-function emptyInputField() {
-	let inputField = $('#input');
-	inputField.on('click', emptyInputField);
-	let inputValue = $('#input').val();
- 	inputValue = ' ';
-}
