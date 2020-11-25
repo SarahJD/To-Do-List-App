@@ -7,29 +7,40 @@ li.append(inputValue)
 if(inputValue === ' ') {
 	alert("You must write something!");
 } else {
+
+	// Appending list item to list
 	$('#list').append(li);
+
+	// adding the button "X"
+	crossOutButton = $('<button class="crossOutButton"></button>');
+	crossOutButton.append(document.createTextNode('X'));
+	crossOutButton.on('click', deleteListItem);
+
+	// Adding the class "delete"
+	function deleteListItem() {
+		li.addClass("delete");
+	};
+
+	// Appending the X-Button to the list item
+	li.append(crossOutButton);
+
+	// Adding eventListener vor crossOut function
+	li.on('dblclick', crossOut)
+
+	// Crossing out an item from the list of items
+	function crossOut() {
+		li.toggleClass("strike");
+	}
+
 }}
 
-// 2. Crossing out an item from the list of items:
-function crossOut() {
-	let li = $('<li></li>');
-	li.toggleClass("strike");
-}
-
-let li = $('<li></li>');
-li.on('dblclick', crossOut());
-
-// 3. Deleting an item from the list of items
-// 3.1. Adding the delete button "X":
-let crossOutButton = $('<button class="crossOutButton"></button>');
-crossOutButton.append (document.createTextNode('X'));
-li.append(crossOutButton);
-
-// 3.2 Adding CLASS DELETE
-crossOutButton.on('click', deleteListItem);
-function deleteListItem() {
-	li.addClass("delete");
-};
-
-// 4. Reordering the items:
+// Reordering the items
 $('#list').sortable();
+
+// Empty input-field when clicked
+function emptyInputField() {
+	let inputField = $('#input');
+	inputField.on('click', emptyInputField);
+	let inputValue = $('#input').val();
+ 	inputValue = ' ';
+}
